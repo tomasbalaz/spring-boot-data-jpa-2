@@ -8,5 +8,6 @@ CREATE DATABASE jpa;
 ALTER USER "postgres" WITH password 'password';
 
 \c jpa
+\d
 \dt
 \d student
