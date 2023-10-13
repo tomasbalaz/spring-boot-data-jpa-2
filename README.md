@@ -9,3 +9,4 @@ ALTER USER "postgres" WITH password 'password';
 
 \c jpa
 \dt
+\d student

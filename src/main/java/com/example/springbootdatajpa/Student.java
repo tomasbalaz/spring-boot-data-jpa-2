@@ -1,6 +1,11 @@
 package com.example.springbootdatajpa;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+
+@Entity(name = "Student")
 public class Student {
+    @Id
     private Long id;
     private String firstName;
     private String lastName;
