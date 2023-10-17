@@ -2,6 +2,8 @@ docker run -d --name spring-data-jpa-course -p 5432:5432 -e POSTGRES_PASSWORD=pa
 
 docker exec -it spring-data-jpa-course bash
 
+docker start spring-data-jpa-course
+
 psql localhost -U postgres
 
 CREATE DATABASE jpa;
