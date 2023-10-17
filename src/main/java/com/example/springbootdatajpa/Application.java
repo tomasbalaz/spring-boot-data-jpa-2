@@ -25,6 +25,13 @@ public class Application {
 					21
 			);
 
+			Student maria2 = new Student(
+					"Maria",
+					"Jones",
+					"maria2.jones@edu.edu",
+					25
+			);
+
 			Student ahmed = new Student(
 					"Ahmed",
 					"Ali",
@@ -32,29 +39,16 @@ public class Application {
 					21
 			);
 
-			System.out.println("Adding Maria and Ahmed");
-			studentRepository.saveAll(List.of(maria,ahmed));
+			studentRepository.saveAll(List.of(maria, ahmed, maria2));
 
-			System.out.println("Number of students");
-			System.out.println(studentRepository.count());
-
-			studentRepository.findById(2L)
+			studentRepository.findStudentByEmail("ahmed.ali@edu.edu")
 					.ifPresentOrElse(System.out::println,
-							() -> System.out.println("Student with ID 2 not found"));
+							() -> System.out.println("Student with email ahmed.ali@edu.edu not found"));
 
-			studentRepository.findById(3L)
-					.ifPresentOrElse(System.out::println,
-							() -> System.out.println("Student with ID 3 not found"));
-
-			System.out.println("Select all students");
-			List<Student> students = studentRepository.findAll();
+			List<Student> students = studentRepository.findStudentsByFirstNameEqualsAndAgeIsGreaterThan(
+					"Maria", 21
+			);
 			students.forEach(System.out::println);
-
-			System.out.println("delete maria");
-			studentRepository.deleteById(1L);
-
-			System.out.println("Number of students");
-			System.out.println(studentRepository.count());
 		};
 	}
 
