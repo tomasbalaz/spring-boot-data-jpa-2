@@ -45,6 +45,10 @@ public class Application {
 					.ifPresentOrElse(System.out::println,
 							() -> System.out.println("Student with email ahmed.ali@edu.edu not found"));
 
+			studentRepository.findStudentByEmailNative("ahmed.ali@edu.edu")
+					.ifPresentOrElse(System.out::println,
+							() -> System.out.println("Student with email ahmed.ali@edu.edu not found"));
+
 			List<Student> students = studentRepository.findStudentsByFirstNameEqualsAndAgeIsGreaterThan(
 					"Maria", 21
 			);
