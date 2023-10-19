@@ -1,11 +1,12 @@
 package com.example.springbootdatajpa;
 
+import com.github.javafaker.Faker;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
-import java.util.List;
+import java.util.stream.IntStream;
 
 @SpringBootApplication
 public class Application {
@@ -16,48 +17,20 @@ public class Application {
 
 	@Bean
 	CommandLineRunner commandLineRunner(StudentRepository studentRepository) {
-		return args -> {
+		return args -> IntStream.rangeClosed(1 ,20)
+				.forEach(value -> {
+					Faker faker = new Faker();
+					String firstName = faker.name().firstName();
+					String lastName = faker.name().lastName();
+					Student student = new Student(
+							firstName,
+							lastName,
+							String.format("%s.%s@edu.edu", firstName, lastName),
+							faker.number().numberBetween(17, 55)
+					);
 
-			Student maria = new Student(
-					"Maria",
-					"Jones",
-					"maria.jones@edu.edu",
-					21
-			);
-
-			Student maria2 = new Student(
-					"Maria",
-					"Jones",
-					"maria2.jones@edu.edu",
-					25
-			);
-
-			Student ahmed = new Student(
-					"Ahmed",
-					"Ali",
-					"ahmed.ali@edu.edu",
-					21
-			);
-
-			studentRepository.saveAll(List.of(maria, ahmed, maria2));
-
-			studentRepository.findStudentByEmail("ahmed.ali@edu.edu")
-					.ifPresentOrElse(System.out::println,
-							() -> System.out.println("Student with email ahmed.ali@edu.edu not found"));
-
-			studentRepository.findStudentByEmailNative("ahmed.ali@edu.edu")
-					.ifPresentOrElse(System.out::println,
-							() -> System.out.println("Student with email ahmed.ali@edu.edu not found"));
-
-			List<Student> students = studentRepository.findStudentsByFirstNameEqualsAndAgeIsGreaterThan(
-					"Maria", 21
-			);
-			students.forEach(System.out::println);
-
-			System.out.println("Deleting Maria2");
-			System.out.println(studentRepository.deleteStudentById(3L));
-
-		};
+					studentRepository.save(student);
+				});
 	}
 
 }
