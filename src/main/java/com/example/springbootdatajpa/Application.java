@@ -53,6 +53,10 @@ public class Application {
 					"Maria", 21
 			);
 			students.forEach(System.out::println);
+
+			System.out.println("Deleting Maria2");
+			System.out.println(studentRepository.deleteStudentById(3L));
+
 		};
 	}
 
