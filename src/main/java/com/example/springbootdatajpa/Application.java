@@ -5,6 +5,8 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 
 import java.util.stream.IntStream;
@@ -27,6 +29,14 @@ public class Application {
 
 			studentRepository.findAll(sort)
 					.forEach(student -> System.out.println(student.getFirstName() + " " + student.getLastName()));
+
+
+			PageRequest pageRequest = PageRequest.of(
+					0,
+					5,
+					Sort.by("firstName").ascending());
+			Page<Student> page = studentRepository.findAll(pageRequest);
+			System.out.println(page);
 		};
 	}
 
