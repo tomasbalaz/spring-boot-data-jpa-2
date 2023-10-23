@@ -19,24 +19,22 @@ public class Application {
 	}
 
 	@Bean
-	CommandLineRunner commandLineRunner(StudentRepository studentRepository) {
+	CommandLineRunner commandLineRunner(
+			StudentRepository studentRepository,
+			StudentIdCardRepository studentIdCardRepository) {
 		return args -> {
-			generateRandomStudents(studentRepository);
+			Faker faker = new Faker();
+			String firstName = faker.name().firstName();
+			String lastName = faker.name().lastName();
+			Student student = new Student(
+					firstName,
+					lastName,
+					String.format("%s.%s@edu.edu", firstName, lastName),
+					faker.number().numberBetween(17, 55)
+			);
+			StudentIdCard studentIdCard = new StudentIdCard("123457890", student);
 
-			//Sort sort = Sort.by(Sort.Direction.ASC, "firstName");
-			Sort sort = Sort.by("firstName").ascending()
-					.and(Sort.by("age")).descending();
-
-			studentRepository.findAll(sort)
-					.forEach(student -> System.out.println(student.getFirstName() + " " + student.getLastName()));
-
-
-			PageRequest pageRequest = PageRequest.of(
-					0,
-					5,
-					Sort.by("firstName").ascending());
-			Page<Student> page = studentRepository.findAll(pageRequest);
-			System.out.println(page);
+			studentIdCardRepository.save(studentIdCard);
 		};
 	}
 

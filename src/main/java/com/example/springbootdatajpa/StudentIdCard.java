@@ -47,6 +47,11 @@ public class StudentIdCard {
     public StudentIdCard() {
     }
 
+    public StudentIdCard(String cardNumber, Student student) {
+        this.cardNumber = cardNumber;
+        this.student = student;
+    }
+
     public StudentIdCard(String cardNumber) {
         this.cardNumber = cardNumber;
     }
