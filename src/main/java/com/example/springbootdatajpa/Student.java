@@ -2,6 +2,9 @@ package com.example.springbootdatajpa;
 
 import jakarta.persistence.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Entity(name = "Student")
 @Table(
         name = "student",
@@ -55,6 +58,13 @@ public class Student {
     )
     private StudentIdCard studentIdCard;
 
+    @OneToMany(
+            mappedBy = "student",
+            orphanRemoval = true,
+            cascade = {CascadeType.PERSIST, CascadeType.REMOVE}
+    )
+    private List<Book> books = new ArrayList<>();
+
     public Student(String firstName,
                    String lastName,
                    String email,
@@ -107,6 +117,20 @@ public class Student {
 
     public void setAge(Integer age) {
         this.age = age;
+    }
+
+    public void addBook(Book book) {
+        if(!books.contains(book)) {
+            books.add(book);
+            book.setStudent(this);
+        }
+    }
+
+    public void removeBook(Book book) {
+        if (books.contains(book)) {
+            books.remove(book);
+            book.setStudent(null);
+        }
     }
 
     @Override
