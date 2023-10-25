@@ -9,6 +9,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 
+import java.time.LocalDateTime;
 import java.util.stream.IntStream;
 
 @SpringBootApplication
@@ -34,15 +35,12 @@ public class Application {
 			);
 			StudentIdCard studentIdCard = new StudentIdCard("123457890", student);
 
+			student.addBook(new Book("Clean Code", LocalDateTime.now()));
+			student.addBook(new Book("Java introduction", LocalDateTime.now()));
+			student.addBook(new Book("Spring data JPA", LocalDateTime.now()));
+
 			studentIdCardRepository.save(studentIdCard);
 
-			studentRepository.findById(1L)
-							.ifPresent(System.out::println);
-
-			studentIdCardRepository.findById(1L)
-					.ifPresent(System.out::println);
-
-			studentRepository.deleteById(1L);
 		};
 	}
 
