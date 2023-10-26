@@ -10,6 +10,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.stream.IntStream;
 
 @SpringBootApplication
@@ -39,8 +40,17 @@ public class Application {
 			student.addBook(new Book("Java introduction", LocalDateTime.now()));
 			student.addBook(new Book("Spring data JPA", LocalDateTime.now()));
 
+
 			studentIdCardRepository.save(studentIdCard);
 
+			studentRepository.findById(1L)
+					.ifPresent(s -> {
+						System.out.println(" fetch books lazy ...");
+						List<Book> books = student.getBooks();
+						books.forEach(book -> {
+							System.out.println(s.getFirstName() + " borrowed " + book.getBookName());
+						});
+					});
 		};
 	}
 
