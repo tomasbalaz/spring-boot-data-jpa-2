@@ -54,7 +54,8 @@ public class Student {
 
     @OneToOne(
             mappedBy = "student",
-            orphanRemoval = true
+            orphanRemoval = true,
+            cascade = {CascadeType.PERSIST, CascadeType.REMOVE}
     )
     private StudentIdCard studentIdCard;
 
@@ -136,6 +137,10 @@ public class Student {
 
     public List<Book> getBooks() {
         return books;
+    }
+
+    public void setStudentIdCard(StudentIdCard studentIdCard) {
+        this.studentIdCard = studentIdCard;
     }
 
     @Override
