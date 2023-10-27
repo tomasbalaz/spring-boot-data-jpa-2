@@ -28,7 +28,6 @@ public class Book {
             name = "book_name",
             nullable = false,
             columnDefinition = "TEXT"
-
     )
     private String bookName;
 
