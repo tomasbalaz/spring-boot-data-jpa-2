@@ -67,6 +67,20 @@ public class Student {
     )
     private List<Book> books = new ArrayList<>();
 
+    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.REMOVE})
+    @JoinTable(
+            name = "enrollment",
+            joinColumns = @JoinColumn(
+                    name = "student_id",
+                    foreignKey = @ForeignKey(name = "enrollment_student_id")
+            ),
+            inverseJoinColumns = @JoinColumn(
+                    name = "course_id",
+                    foreignKey = @ForeignKey(name = "enrollment_course_id")
+            )
+    )
+    private List<Course> courses = new ArrayList<>();
+
     public Student(String firstName,
                    String lastName,
                    String email,
