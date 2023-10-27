@@ -16,7 +16,7 @@ public class Book {
     )
     @GeneratedValue(
             strategy = GenerationType.SEQUENCE,
-            generator = "book_id_sequence"
+            generator = "book_sequence"
     )
     @Column(
             name = "id",
