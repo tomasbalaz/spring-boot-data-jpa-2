@@ -36,6 +36,9 @@ public class Application {
 			student.addBook(new Book("Java introduction", LocalDateTime.now()));
 			student.addBook(new Book("Spring data JPA", LocalDateTime.now()));
 
+			student.addCourse(new Course("Computer Science", "IT"));
+			student.addCourse(new Course("Spring Data JPA", "IT"));
+
 			student.setStudentIdCard(studentIdCard);
 			studentRepository.save(student);
 
