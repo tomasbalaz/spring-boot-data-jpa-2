@@ -39,10 +39,11 @@ public class Course {
     )
     private String department;
 
-    @ManyToMany(
-            mappedBy = "courses"
+    @OneToMany(
+            mappedBy = "course",
+            cascade = {CascadeType.PERSIST, CascadeType.REMOVE}
     )
-    private List<Student> students = new ArrayList<>();
+    private List<Enrollment> enrollments = new ArrayList<>();
 
     public Course() {
     }
@@ -76,8 +77,18 @@ public class Course {
         this.department = department;
     }
 
-    public List<Student> getStudents() {
-        return students;
+    public void addEnrollments(Enrollment enrollment) {
+        if (!enrollments.contains(enrollment)) {
+            enrollments.add(enrollment);
+        }
+    }
+
+    public void removeEnrollment(Enrollment enrollment) {
+        enrollments.remove(enrollment);
+    }
+
+    public List<Enrollment> getEnrollments() {
+        return enrollments;
     }
 
     @Override
