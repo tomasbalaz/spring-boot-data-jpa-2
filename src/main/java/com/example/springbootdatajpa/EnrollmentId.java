@@ -3,13 +3,14 @@ package com.example.springbootdatajpa;
 import jakarta.persistence.Column;
 import jakarta.persistence.Embeddable;
 
+import java.io.Serializable;
 import java.util.Objects;
 
 @Embeddable
-public class EnrollmentId {
+public class EnrollmentId implements Serializable {
     @Column(name = "student_id")
     private Long studentId;
-    @Column("course_id")
+    @Column(name = "course_id")
     private Long courseId;
 
     public EnrollmentId() {

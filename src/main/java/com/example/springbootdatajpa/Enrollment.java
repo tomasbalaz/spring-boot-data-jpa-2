@@ -21,7 +21,8 @@ public class Enrollment {
     public Enrollment() {
     }
 
-    public Enrollment(Student student, Course course) {
+    public Enrollment(EnrollmentId id, Student student, Course course) {
+        this.id = id;
         this.student = student;
         this.course = course;
     }
