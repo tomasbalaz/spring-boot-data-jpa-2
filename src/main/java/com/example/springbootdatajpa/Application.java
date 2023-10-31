@@ -40,12 +40,16 @@ public class Application {
 					new Enrollment(
 							new EnrollmentId(1l,1L),
 							student,
-							new Course("Computer Science", "IT")));
+							new Course("Computer Science", "IT"),
+							LocalDateTime.now()
+					));
 
 			student.addEnrollments(
 					new Enrollment(new EnrollmentId(1L, 2L),
 							student,
-							new Course("Spring Data JPA", "IT")));
+							new Course("Spring Data JPA", "IT"),
+							LocalDateTime.now()
+					));
 
 			student.setStudentIdCard(studentIdCard);
 			studentRepository.save(student);
